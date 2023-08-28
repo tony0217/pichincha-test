@@ -1,0 +1,61 @@
+<div class="table-actions">
+  <div class="search-box">
+    <input type="text" placeholder="Search...">
+  </div>
+  <button class="add-button" (click)="goToAddProduct()">Agregar</button>
+</div>
+
+<div class="container">
+  <div class="container-table">
+    <table class="custom-table">
+      <thead>
+        <tr class="sticky-header">
+          <th>Logo</th>
+          <th>Nombre del Producto</th>
+          <th>Descripción <i class="fa-solid fa-circle-info"></i></th>
+          <th>Fecha de Liberación <i class="fa-solid fa-circle-info"></i></th>
+          <th>Fecha de Reestructuración <i class="fa-solid fa-circle-info"></i></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td class="logo-cell"><img [src]="product.logo" alt="Logo"></td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.date_release | date:'dd/MM/yyyy'}}</td>
+          <td>{{ product.date_revision | date:'dd/MM/yyyy'}}</td>
+          <td>
+            <div class="options-container">
+              <button class="options-button" (click)="showOptions($event, product.id)">
+                <i class="fas fa-ellipsis-v"></i>
+              </button>
+              <div class="options-dialog" [id]="'optionsDialog' + product.id">
+                <button class="option-button" (click)="goToEditProduct(product.id)">
+                  <i class="far fa-edit"></i> Editar
+                </button>
+                <button class="option-button" (click)="goToDeleteProduct(product.id)">
+                  <i class="far fa-trash-alt"></i> Eliminar
+                </button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="footer">
+    <div class="results-summary">
+      {{ products.length }} resultados
+    </div>
+    <div class="pagination">
+      <select>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+      </select>
+    </div>
+  </div>
+</div>

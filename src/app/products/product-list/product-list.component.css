@@ -1,0 +1,168 @@
+.container {
+  margin: 10px 40px 40px 40px;
+  padding: 20px 20px 80px 20px; 
+  max-height: 400px;
+  background-color: white;
+}
+
+.table-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+  padding: 0px 40px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+}
+
+.search-box input[type="text"] {
+  padding: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+
+.add-button {
+  padding: 15px 20px;
+  font-size: 14px;
+  background-color: #ffdd05;
+  color: #0f275c;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+
+.container-table {
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: white;
+}
+
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  table-layout: fixed;
+}
+
+.sticky-header {
+  position: sticky;
+  top: -1px;
+  background-color: #f8f9fa;
+  height: 80px;
+  z-index: 1;
+  color: #595858;
+}
+
+.sticky-header th {
+  padding: 8px;
+  text-align: left;
+  /* white-space: nowrap; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.custom-table td {
+  padding: 8px;
+  border-top: 1px solid #dee2e6;
+  text-align: left;
+  /* white-space: nowrap; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.custom-table th:first-child,
+.custom-table td:first-child {
+  border-left: none;
+}
+
+.custom-table th:last-child,
+.custom-table td:last-child {
+  border-right: none;
+}
+
+.custom-table th {
+  background-color: #f8f9fa;
+  border-color: #dee2e6;
+}
+
+.custom-table a {
+  margin-right: 5px;
+}
+
+
+.logo-cell img {
+  border-radius: 50%;
+  max-width: 80px;
+  height: 80px;
+  object-fit: fill;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.footer .results-summary {
+  font-size: 14px;
+}
+
+.footer .pagination {
+  font-size: 14px;
+}
+
+.footer select {
+  padding: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.options-container {
+  position: relative;
+  display: inline-block;
+}
+
+.options-dialog {
+  display: none;
+  top: 100%;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.option-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.option-button i {
+  font-size: 16px;
+}
+
+.options-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
