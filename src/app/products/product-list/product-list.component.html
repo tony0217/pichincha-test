@@ -1,6 +1,6 @@
 <div class="table-actions">
   <div class="search-box">
-    <input type="text" placeholder="Search...">
+    <input type="text" placeholder="Search..." [(ngModel)]="searchTerm" (input)="onSearchChange()">
   </div>
   <button class="add-button" (click)="goToAddProduct()">Agregar</button>
 </div>
@@ -19,7 +19,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of products">
+        <tr *ngFor="let product of displayedProducts">
           <td class="logo-cell"><img [src]="product.logo" alt="Logo"></td>
           <td>{{ product.name }}</td>
           <td>{{ product.description }}</td>
@@ -31,7 +31,7 @@
                 <i class="fas fa-ellipsis-v"></i>
               </button>
               <div class="options-dialog" [id]="'optionsDialog' + product.id">
-                <button class="option-button" (click)="goToEditProduct(product.id)">
+                <button class="option-button" (click)="goToEditProduct(product)">
                   <i class="far fa-edit"></i> Editar
                 </button>
                 <button class="option-button" (click)="goToDeleteProduct(product.id)">
@@ -47,14 +47,16 @@
   </div>
   <div class="footer">
     <div class="results-summary">
-      {{ products.length }} resultados
+      {{ (currentPage - 1) * pageSize + 1 }} - {{ (currentPage - 1) * pageSize + displayedProducts.length }}
+      de {{ products.length }} Resultados
     </div>
     <div class="pagination">
-      <select>
+      <select (change)="onPageSizeChange($event)">
         <option value="5">5</option>
         <option value="10">10</option>
         <option value="20">20</option>
         <option value="50">50</option>
+        <option value="all">Todos</option>
       </select>
     </div>
   </div>

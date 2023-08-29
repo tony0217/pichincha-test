@@ -1,97 +1,77 @@
-import { Component, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Product } from '../models/product.model';
+import { ProductService } from './../product.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnInit {
 
-  products = [
-    {
-      id: "trj-crs",
-      name: "Tarjetas de Credito",
-      description: "Tarjera de consumo la modalidad de credito",
-      logo: "https://www.visa.com.ec/dam/VCOM/regional/lac/SPA/Default/Pay%20With%20Visa/Tarjetas/visa-signature-400x225.jpg",
-      date_release: "2023-02-01T00:00:00.000+00:00",
-      date_revision: "2024-02-01T00:00:00.000+00:00"
-    },
-    {
-      id: "prod-2",
-      name: "Producto 2",
-      description: "Descripción del Producto 2",
-      logo: "https://www.visa.com.ec/dam/VCOM/regional/lac/SPA/Default/Pay%20With%20Visa/Tarjetas/visa-signature-400x225.jpg",
-      date_release: "2023-03-01T00:00:00.000+00:00",
-      date_revision: "2024-03-01T00:00:00.000+00:00"
-    },
-    {
-      id: "prod-3",
-      name: "Producto 3",
-      description: "Descripción del Producto 3",
-      logo: "https://www.visa.com.ec/dam/VCOM/regional/lac/SPA/Default/Pay%20With%20Visa/Tarjetas/visa-signature-400x225.jpg",
-      date_release: "2023-04-01T00:00:00.000+00:00",
-      date_revision: "2024-04-01T00:00:00.000+00:00"
-    },
-    {
-      id: "prod-4",
-      name: "Producto 4",
-      description: "Descripción del Producto 4",
-      logo: "https://www.visa.com.ec/dam/VCOM/regional/lac/SPA/Default/Pay%20With%20Visa/Tarjetas/visa-signature-400x225.jpg",
-      date_release: "2023-04-01T00:00:00.000+00:00",
-      date_revision: "2024-04-01T00:00:00.000+00:00"
-    },
-    {
-      id: "prod-5",
-      name: "Producto 5",
-      description: "Descripción del Producto 5",
-      logo: "https://www.visa.com.ec/dam/VCOM/regional/lac/SPA/Default/Pay%20With%20Visa/Tarjetas/visa-signature-400x225.jpg",
-      date_release: "2023-04-01T00:00:00.000+00:00",
-      date_revision: "2024-04-01T00:00:00.000+00:00"
-    },
-    {
-      id: "prod-6",
-      name: "Producto 6",
-      description: "Descripción del Producto 6",
-      logo: "https://www.visa.com.ec/dam/VCOM/regional/lac/SPA/Default/Pay%20With%20Visa/Tarjetas/visa-signature-400x225.jpg",
-      date_release: "2023-04-01T00:00:00.000+00:00",
-      date_revision: "2024-04-01T00:00:00.000+00:00"
-    },
-    {
-      id: "prod-7",
-      name: "Producto 7",
-      description: "Descripción del Producto 7",
-      logo: "https://www.visa.com.ec/dam/VCOM/regional/lac/SPA/Default/Pay%20With%20Visa/Tarjetas/visa-signature-400x225.jpg",
-      date_release: "2023-04-01T00:00:00.000+00:00",
-      date_revision: "2024-04-01T00:00:00.000+00:00"
-    },
-    {
-      id: "prod-8",
-      name: "Producto 8",
-      description: "Descripción del Producto 8",
-      logo: "https://www.visa.com.ec/dam/VCOM/regional/lac/SPA/Default/Pay%20With%20Visa/Tarjetas/visa-signature-400x225.jpg",
-      date_release: "2023-04-01T00:00:00.000+00:00",
-      date_revision: "2024-04-01T00:00:00.000+00:00"
-    },
-    {
-      id: "prod-9",
-      name: "Producto 9",
-      description: "Descripción del Producto 9",
-      logo: "https://www.visa.com.ec/dam/VCOM/regional/lac/SPA/Default/Pay%20With%20Visa/Tarjetas/visa-signature-400x225.jpg",
-      date_release: "2023-04-01T00:00:00.000+00:00",
-      date_revision: "2024-04-01T00:00:00.000+00:00"
-    },
-    {
-      id: "prod-10",
-      name: "Producto 10",
-      description: "Descripción del Producto 10",
-      logo: "https://www.visa.com.ec/dam/VCOM/regional/lac/SPA/Default/Pay%20With%20Visa/Tarjetas/visa-signature-400x225.jpg",
-      date_release: "2023-10-01T00:00:00.000+00:00",
-      date_revision: "2024-10-01T00:00:00.000+00:00"
+  products: Product[] = [];
+  displayedProducts: Product[] = [];
+  searchTerm: string = '';
+  currentPage = 1;
+  pageSize = 5;
+  totalPages = 0;
+
+  private productsSubscription: Subscription | undefined;
+
+  constructor(
+    private router: Router,
+    private productService: ProductService,
+  ) { }
+
+  ngOnInit(): void {
+    this.loadProducts();
+  }
+
+  loadProducts() {
+    this.productsSubscription = this.productService.getProducts().subscribe({
+      next: (products: Product[]) => {
+        this.products = products;
+        this.updateDisplayedProducts();
+      },
+      error: (error) => {
+        console.error('Error loading products:', error);
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.productsSubscription) {
+      this.productsSubscription.unsubscribe();
     }
-  ];
+  }
 
-  constructor(private router: Router) { }
+  onSearchChange() {
+    this.currentPage = 1;
+    this.updateDisplayedProducts();
+    this.calculateTotalPages();
+  }
+
+  updateDisplayedProducts() {
+    const filteredProducts = this.products.filter(product =>
+      product.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.displayedProducts = filteredProducts.slice(startIndex, endIndex);
+  }
+
+  onPageSizeChange(event: Event) {
+    const newSize = (event.target as HTMLSelectElement).value;
+    this.pageSize = newSize === 'all' ? this.products.length : Number(newSize);
+    this.updateDisplayedProducts();
+    this.calculateTotalPages();
+  }
+
+  calculateTotalPages() {
+    this.totalPages = Math.ceil(this.products.length / this.pageSize);
+  }
 
   showOptions(event: Event, productId: string) {
     const target = event.target as HTMLElement;
@@ -117,14 +97,12 @@ export class ProductListComponent {
   }
 
 
-  goToEditProduct(id: string) {
-    console.log("🚀 ~ file: product-list.component.ts:114 ~ ProductListComponent ~ editProduct ~ id:", id)
-
+  goToEditProduct(product: Product) {
+    this.router.navigate([`/products/edit/${product.id}`], { state: { product } });
   }
 
   goToDeleteProduct(id: string) {
     console.log("🚀 ~ file: product-list.component.ts:119 ~ ProductListComponent ~ deleteProduct ~ id:", id)
-
   }
 
 }
