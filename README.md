@@ -2,9 +2,9 @@
 
 ¡Bienvenido a PichinchaTest! Este proyecto fue creado con [Angular CLI](https://github.com/angular/angular-cli) versión 16.2.0.
 
-<div align="center">
-  <img src="https://www.mouseinteractivo.com/wp-content/uploads/mouse-pichincha-0.jpg" alt="Imagen" />
-</div>
+<p align="center">
+  <img src="https://www.mouseinteractivo.com/wp-content/uploads/mouse-pichincha-0.jpg" alt="Imagen" width="300" />
+</p>
 
 ## 🏗️ Estructura del Proyecto
 ```
