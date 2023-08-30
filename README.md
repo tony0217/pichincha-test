@@ -29,7 +29,6 @@ La estructura del proyecto se organiza de la siguiente manera:
 ## ✅ Pruebas y Validación
 
 - **Pruebas Unitarias**: Ejecuta `ng test` para realizar pruebas con [Karma](https://karma-runner.github.io).
-- **Pruebas End-to-End**: Utiliza `ng e2e` para pruebas integrales.
 
 ## ℹ️ Más Información
 

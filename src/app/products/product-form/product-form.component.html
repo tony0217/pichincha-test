@@ -7,7 +7,7 @@
       <div class="column">
         <div class="field">
           <label for="id">ID</label>
-          <input type="text" id="id" formControlName="id" [class.invalid]="isInvalid('id')">
+          <input type="text" id="id" formControlName="id" [class.invalid]="isInvalid('id')" (input)="onInput()">
           <div class="error-message" *ngIf="isInvalid('id')">
             {{ getFieldErrorMessage('id', 'required') }}
             {{ getFieldErrorMessage('id', 'minlength') }}
@@ -38,7 +38,7 @@
       <div class="column">
         <div class="field">
           <label for="name">Nombre</label>
-          <input type="text" id="name" formControlName="name" [class.invalid]="isInvalid('name')">
+          <input type="text" id="name" formControlName="name" [class.invalid]="isInvalid('name')" (input)="onInput()">
           <div class="error-message" *ngIf="isInvalid('name')">
             {{ getFieldErrorMessage('name','required') }}
             {{ getFieldErrorMessage('name', 'minlength') }}
@@ -71,5 +71,6 @@
         {{ isSubmitting ? 'Enviando...' : 'Enviar' }}
       </button>
     </div>
+    <h5 class="success"> {{ isComplete ? 'Producto Creado' : '' }}</h5>
   </form>
 </div>

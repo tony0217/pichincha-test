@@ -20,6 +20,8 @@ export class ProductFormComponent implements OnInit {
 
   isSubmitting = false;
 
+  isComplete = false;
+
   registrationForm!: FormGroup;
 
   constructor(
@@ -32,6 +34,10 @@ export class ProductFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+  }
+
+  onInput() {
+    this.isComplete = false;
   }
 
   initForm(): void {
@@ -106,11 +112,13 @@ export class ProductFormComponent implements OnInit {
     action$.pipe(
       finalize(() => {
         this.isSubmitting = false;
+      
         this.isEdit ? this.router.navigate(['/']) : this.resetForm();
       }),
       tap({
         next: (result) => {
           console.log(this.isEdit ? 'Producto actualizado:' : 'Producto creado:', result);
+          this.isComplete = true;
           this.submitForm.emit(result);
         },
         error: (error) => {
