@@ -1,27 +1,31 @@
 # PichinchaTest
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
+¡Bienvenido a PichinchaTest! Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) versión 16.2.0.
 
-## Development server
+<div style="text-align: center;">
+  <img src="https://www.mouseinteractivo.com/wp-content/uploads/mouse-pichincha-0.jpg" alt="Imagen" />
+</div>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Servidor de Desarrollo
 
-## Code scaffolding
+Ejecuta `ng serve` para iniciar el servidor de desarrollo. Luego, abre tu navegador y navega a `http://localhost:4200/`. La aplicación se recargará automáticamente si realizas cambios en los archivos fuente.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Estructura de Código
 
-## Build
+Utiliza `ng generate component nombre-del-componente` para generar un nuevo componente. También puedes usar `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Compilación
 
-## Running unit tests
+Ejecuta `ng build` para compilar el proyecto. Los artefactos de la compilación se almacenarán en el directorio `dist/`.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Ejecución de Pruebas Unitarias
 
-## Running end-to-end tests
+Ejecuta `ng test` para ejecutar las pruebas unitarias a través de [Karma](https://karma-runner.github.io).
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Ejecución de Pruebas End-to-End
 
-## Further help
+Ejecuta `ng e2e` para ejecutar pruebas end-to-end a través de una plataforma de tu elección. Para usar este comando, primero debes agregar un paquete que implemente capacidades de pruebas end-to-end.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Ayuda Adicional
+
+Para obtener más ayuda sobre Angular CLI, utiliza `ng help` o visita la página [Angular CLI Overview and Command Reference](https://angular.io/cli).
