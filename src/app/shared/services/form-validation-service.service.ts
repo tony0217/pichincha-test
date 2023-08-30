@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
-
-type FieldErrorMessages = {
-  required: string;
-  minlength: string;
-  maxlength: string;
-  invalidDate: string;
-};
+import { AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/forms';
+import { catchError, map, of, tap } from 'rxjs';
+import { FieldErrorMessages } from 'src/app/products/models/product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +23,7 @@ export class FormValidationService {
         minlength: `El ${fieldName} debe tener al menos ${field.errors?.['minlength']?.requiredLength ?? 0} caracteres.`,
         maxlength: `El ${fieldName} no debe tener más de ${field.errors?.['maxlength']?.requiredLength ?? 0} caracteres.`,
         invalidDate: `La fecha de lanzamiento debe ser igual o posterior a la fecha actual.`,
+        idExist: `El ${fieldName.toUpperCase()} ya existe en la base de datos`,
       };
 
       return errors[errorType];
@@ -41,4 +37,17 @@ export class FormValidationService {
     return !!control && control.invalid && control.touched;
   }
 
+  validateExistID(service: any): AsyncValidatorFn {
+    return (control: AbstractControl): import("rxjs").Observable<ValidationErrors | null> => {
+      return service.verificationId(control.value).pipe(
+        map((isValid: boolean) => {
+          return isValid ? { idExist: true } : null;
+        }),
+        catchError((error) => {
+          console.error('Error verifying product ID:', error);
+          return of(null);
+        })
+      );
+    };
+  }
 }

@@ -1,18 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { finalize, tap } from 'rxjs/operators';
-import { DateService } from './../services/date-service.service';
-import { FormValidationService } from '../services/form-validation-service.service';
-import { Product } from 'src/app/products/models/product.model';
+import { DateService } from '../../shared/services/date-service.service';
+import { FormValidationService } from '../../shared/services/form-validation-service.service';
+import { FieldErrorMessages, Product } from 'src/app/products/models/product.model';
 import { ProductService } from 'src/app/products/product.service';
 import { Router } from '@angular/router';
-
-type FieldErrorMessages = {
-  required: string;
-  minlength: string;
-  maxlength: string;
-  invalidDate: string;
-};
 
 @Component({
   selector: 'app-product-form',
@@ -43,13 +36,24 @@ export class ProductFormComponent implements OnInit {
 
   initForm(): void {
     this.registrationForm = this.fb.group({
-      id: [{ value: '', disabled: this.isEdit }, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
+      id: [
+        { value: '', disabled: this.isEdit },
+        {
+          validators: [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(10)
+          ],
+          asyncValidators: !this.isEdit ? [this.formValidationService.validateExistID(this.productService)] : []
+        }
+      ],
       description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]],
       name: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
       logo: ['', Validators.required],
       date_revision: [{ value: '', disabled: true }, Validators.required],
       date_release: ['', [Validators.required, this.dateService.validateDateIsBeforeOrToday]],
     });
+
 
     if (this.isEdit) {
       this.registrationForm.patchValue({

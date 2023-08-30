@@ -13,15 +13,19 @@ export class DateService {
     if (!date) {
       return '';
     }
-    return format(new Date(date), 'yyyy-MM-dd');
+    const utcDate = new Date(date);
+    const localDate = new Date(utcDate.getTime() + utcDate.getTimezoneOffset() * 60000);
+    return format(localDate, 'yyyy-MM-dd');
   }
 
   validateDateIsBeforeOrToday(control: AbstractControl): ValidationErrors | null {
     const selectedDate = new Date(control.value);
-    const selectedDateLocal = new Date(selectedDate.getTime() - selectedDate.getTimezoneOffset() * 60000);
-    const today = startOfToday();
-    
-    return isAfter(selectedDateLocal, today) || isToday(selectedDateLocal) ? null : { invalidDate: true };
+    const selectedDateUTC = new Date(selectedDate.getUTCFullYear(), selectedDate.getUTCMonth(), selectedDate.getUTCDate());
+    const today = new Date();
+    today.setUTCHours(0, 0, 0, 0);
+    return selectedDateUTC >= today ? null : { invalidDate: true };
   }
-  
+
+
+
 }

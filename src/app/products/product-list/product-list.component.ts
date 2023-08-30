@@ -13,7 +13,9 @@ export class ProductListComponent implements OnInit {
 
   products: Product[] = [];
   displayedProducts: Product[] = [];
+  private productToDeleteId: string | null = null;
   searchTerm: string = '';
+  showDialog = false;
   currentPage = 1;
   pageSize = 5;
   totalPages = 0;
@@ -101,8 +103,31 @@ export class ProductListComponent implements OnInit {
     this.router.navigate([`/products/edit/${product.id}`], { state: { product } });
   }
 
-  goToDeleteProduct(id: string) {
-    console.log("🚀 ~ file: product-list.component.ts:119 ~ ProductListComponent ~ deleteProduct ~ id:", id)
+  showDialogDeleteProduct(productId: string) {
+    this.productToDeleteId = productId;
+    this.showDialog = true;
+  }
+
+  confirmDelete() {
+    if (this.productToDeleteId) {
+      this.productService.deleteProduct(this.productToDeleteId).subscribe({
+        next: (result) => {
+          console.log('Producto eliminado:', result);
+          this.loadProducts();
+        },
+        error: (error) => {
+          console.error('Error al eliminar producto:', error);
+        }
+      });
+
+      this.productToDeleteId = null;
+      this.showDialog = false;
+    }
+  }
+
+  cancelDelete() {
+    this.productToDeleteId = null;
+    this.showDialog = false;
   }
 
 }
