@@ -7,12 +7,12 @@
 </div>
 
 ## 🏗️ Estructura del Proyecto
-
+```
 📦 src
 ┣ 📂 app
 ┃ ┣ 📂 product
 ┃ ┣ 📂 shared
-
+```
 
 La estructura del proyecto se organiza de la siguiente manera:
 
