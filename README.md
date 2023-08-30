@@ -1,37 +1,36 @@
 # PichinchaTest
 
-¡Bienvenido a PichinchaTest! Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) versión 16.2.0.
+¡Bienvenido a PichinchaTest! Este proyecto fue creado con [Angular CLI](https://github.com/angular/angular-cli) versión 16.2.0.
 
-<div style="text-align: center;">
+<div align="center">
   <img src="https://www.mouseinteractivo.com/wp-content/uploads/mouse-pichincha-0.jpg" alt="Imagen" />
 </div>
 
-## Estructura del Proyecto
+## 🏗️ Estructura del Proyecto
 
-- **app**: Directorio principal de la aplicación.
-  - **product**: Módulo relacionado con la gestión de productos.
-  - **shared**: Módulo compartido con componentes, servicios y directivas reutilizables.
+📦 src
+┣ 📂 app
+┃ ┣ 📂 product
+┃ ┣ 📂 shared
 
-## Servidor de Desarrollo
 
-Ejecuta `ng serve` para iniciar el servidor de desarrollo. Luego, abre tu navegador y navega a `http://localhost:4200/`. La aplicación se recargará automáticamente si realizas cambios en los archivos fuente.
+La estructura del proyecto se organiza de la siguiente manera:
 
-## Estructura de Código
+- **app**: Este es el directorio principal de la aplicación.
+  - **product**: Aquí se encuentra el módulo de gestión de productos.
+  - **shared**: En este módulo se alojan componentes, servicios y directivas reutilizables.
 
-Utiliza `ng generate component nombre-del-componente` para generar un nuevo componente. También puedes usar `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## 🚀 Funcionalidades Principales
 
-## Compilación
+- **Desarrollo Local**: Ejecuta `ng serve` y navega a `http://localhost:4200/`.
+- **Generación Rápida**: Utiliza `ng generate component nombre-del-componente`.
+- **Compilación**: Ejecuta `ng build` para compilar el proyecto en el directorio `dist/`.
 
-Ejecuta `ng build` para compilar el proyecto. Los artefactos de la compilación se almacenarán en el directorio `dist/`.
+## ✅ Pruebas y Validación
 
-## Ejecución de Pruebas Unitarias
+- **Pruebas Unitarias**: Ejecuta `ng test` para realizar pruebas con [Karma](https://karma-runner.github.io).
+- **Pruebas End-to-End**: Utiliza `ng e2e` para pruebas integrales.
 
-Ejecuta `ng test` para ejecutar las pruebas unitarias a través de [Karma](https://karma-runner.github.io).
-
-## Ejecución de Pruebas End-to-End
-
-Ejecuta `ng e2e` para ejecutar pruebas end-to-end a través de una plataforma de tu elección. Para usar este comando, primero debes agregar un paquete que implemente capacidades de pruebas end-to-end.
-
-## Ayuda Adicional
+## ℹ️ Más Información
 
 Para obtener más ayuda sobre Angular CLI, utiliza `ng help` o visita la página [Angular CLI Overview and Command Reference](https://angular.io/cli).
