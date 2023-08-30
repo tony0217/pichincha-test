@@ -6,6 +6,12 @@
   <img src="https://www.mouseinteractivo.com/wp-content/uploads/mouse-pichincha-0.jpg" alt="Imagen" />
 </div>
 
+## Estructura del Proyecto
+
+- **app**: Directorio principal de la aplicación.
+  - **product**: Módulo relacionado con la gestión de productos.
+  - **shared**: Módulo compartido con componentes, servicios y directivas reutilizables.
+
 ## Servidor de Desarrollo
 
 Ejecuta `ng serve` para iniciar el servidor de desarrollo. Luego, abre tu navegador y navega a `http://localhost:4200/`. La aplicación se recargará automáticamente si realizas cambios en los archivos fuente.
